@@ -1,0 +1,317 @@
+﻿<!doctype html>
+<html lang="vi" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Nhà Giả Kim – Paulo Coelho | Đặt mua sách</title>
+    <meta name="description" content="Nhà Giả Kim của Paulo Coelho – hành trình về giấc mơ, lòng dũng cảm và tiếng gọi của trái tim. Đọc thử, xem đánh giá và đặt mua sách, thanh toán COD hoặc chuyển khoản.">
+    <meta name="theme-color" content="#21123D">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="product">
+    <meta property="og:title" content="Nhà Giả Kim – Paulo Coelho">
+    <meta property="og:description" content="Một hành trình đầy cảm hứng về giấc mơ, lòng dũng cảm và việc lắng nghe tiếng gọi của trái tim.">
+    <meta property="og:image" content="images/sach-nha-gia-kim.png">
+    <meta property="og:locale" content="vi_VN">
+    <!-- TODO: thêm <link rel="canonical" href="https://ten-mien-that/"> khi có domain -->
+
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Một font duy nhất cho toàn trang: Be Vietnam Pro (hỗ trợ tiếng Việt tốt) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Tailwind CSS v4 (bản browser – tiện cho học tập/demo.
+       Khi triển khai production: build bằng Tailwind CLI/Vite theo design.md) -->
+    <script src="https://cdn.jsdelivr.net/npm/@@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+        @@theme {
+        --color-midnight: #21123D;
+        --color-royal: #34205E;
+        --color-antique-gold: #D8AD61;
+        --color-champagne: #F3D9A5;
+        --color-ivory: #F7F2E9;
+        --color-sand: #EAE0D2;
+        --color-terracotta: #C98754;
+        --color-ink: #292338;
+        --color-bronze: #845A24;
+        --color-footer: #180E2C;
+        --font-display: "Be Vietnam Pro", system-ui, sans-serif;
+        --font-body: "Be Vietnam Pro", system-ui, sans-serif;
+        }
+    </style>
+
+    <!-- CSS tùy chỉnh -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="preload" as="image" href="images/sach-nha-gia-kim.png" fetchpriority="high">
+    <script>document.documentElement.classList.replace('no-js', 'js');</script>
+
+    <!-- Slick carousel (cần jQuery) – dùng cho slider đánh giá -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+
+    <!-- JavaScript (defer: chạy theo thứ tự sau khi parse xong HTML) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" defer></script>
+    <!-- StPageFlip – hiệu ứng lật trang sách cho mục Đọc thử -->
+    <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js" defer></script>
+    <script src="js/data.js" defer></script>
+    <script src="js/navigation.js" defer></script>
+    <script src="js/media.js" defer></script>
+    <script src="js/preview.js" defer></script>
+    <script src="js/reviews.js" defer></script>
+    <script src="js/main.js" defer></script>
+</head>
+
+<body class="font-body text-ink bg-ivory">
+    <a href="#main" class="skip-link">Bỏ qua đến nội dung chính</a>
+
+    <!-- ===================== HEADER ===================== -->
+    <header id="site-header" class="site-header sticky top-0 z-40 bg-midnight text-ivory">
+        <div class="container-site flex h-[76px] items-center justify-between gap-3">
+            <a href="#gioi-thieu" class="flex items-center gap-3 shrink-0" aria-label="Nhà Giả Kim – về đầu trang">
+                <svg width="38" height="38" viewBox="0 0 64 64" aria-hidden="true">
+                    <circle cx="32" cy="32" r="27" fill="none" stroke="#D8AD61" stroke-opacity=".45" stroke-width="1.5" />
+                    <g stroke="#D8AD61" stroke-width="2.5" stroke-linecap="round">
+                        <line x1="32" y1="10" x2="32" y2="17" /><line x1="32" y1="47" x2="32" y2="54" />
+                        <line x1="10" y1="32" x2="17" y2="32" /><line x1="47" y1="32" x2="54" y2="32" />
+                        <line x1="16.5" y1="16.5" x2="21.5" y2="21.5" /><line x1="42.5" y1="42.5" x2="47.5" y2="47.5" />
+                        <line x1="47.5" y1="16.5" x2="42.5" y2="21.5" /><line x1="21.5" y1="42.5" x2="16.5" y2="47.5" />
+                    </g>
+                    <circle cx="32" cy="32" r="9" fill="#F3D9A5" />
+                </svg>
+                <span class="font-display text-xl font-semibold tracking-wide text-champagne max-[379px]:hidden">Nhà Giả Kim</span>
+            </a>
+
+            <nav aria-label="Điều hướng chính" class="hidden lg:block">
+                <ul class="flex items-center gap-8 text-[15px]">
+                    <li><a class="nav-link" href="#gioi-thieu">Giới thiệu</a></li>
+                    <li><a class="nav-link" href="#tac-gia">Tác giả</a></li>
+                    <li><a class="nav-link" href="#truyen-thong">Truyền thông</a></li>
+                    <li><a class="nav-link" href="#doc-thu">Đọc thử</a></li>
+                    <li><a class="nav-link" href="#danh-gia">Đánh giá</a></li>
+                </ul>
+            </nav>
+
+            <div class="flex items-center gap-2">
+                <button type="button" data-open-order class="btn btn-primary btn-sm">
+                    <i class="fa-solid fa-bag-shopping" aria-hidden="true"></i> Mua ngay
+                </button>
+                <button type="button" id="nav-toggle" class="icon-btn lg:hidden" aria-expanded="false" aria-controls="mobile-nav" aria-label="Mở menu">
+                    <i class="fa-solid fa-bars" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobile-nav" class="mobile-nav lg:hidden" hidden>
+            <nav aria-label="Điều hướng trên di động" class="container-site pb-6 pt-2">
+                <ul>
+                    <li><a href="#gioi-thieu">Giới thiệu <i class="fa-solid fa-chevron-right text-xs text-antique-gold" aria-hidden="true"></i></a></li>
+                    <li><a href="#tac-gia">Tác giả <i class="fa-solid fa-chevron-right text-xs text-antique-gold" aria-hidden="true"></i></a></li>
+                    <li><a href="#truyen-thong">Truyền thông <i class="fa-solid fa-chevron-right text-xs text-antique-gold" aria-hidden="true"></i></a></li>
+                    <li><a href="#doc-thu">Đọc thử <i class="fa-solid fa-chevron-right text-xs text-antique-gold" aria-hidden="true"></i></a></li>
+                    <li><a href="#danh-gia">Đánh giá <i class="fa-solid fa-chevron-right text-xs text-antique-gold" aria-hidden="true"></i></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    @RenderBody()
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="site-footer pb-28 md:pb-0">
+        <div class="container-site grid grid-cols-2 gap-x-8 gap-y-10 py-16 lg:grid-cols-[1.6fr_1fr_1fr] lg:gap-12">
+            <div class="col-span-2 lg:col-span-1">
+                <a href="#gioi-thieu" class="flex items-center gap-3">
+                    <img src="images/favicon.svg" width="40" height="40" alt="" loading="lazy">
+                    <span class="font-display text-xl font-semibold text-champagne" data-store="name">Nhà sách</span>
+                </a>
+                <p class="mt-4 max-w-sm text-sm leading-relaxed" data-store="about"></p>
+                <ul class="mt-5 space-y-1 text-sm" id="footer-contact" aria-label="Thông tin liên hệ"></ul>
+                <div class="mt-6 flex gap-3" id="footer-social"></div>
+            </div>
+
+            <div>
+                <h3>Liên kết nhanh</h3>
+                <ul class="text-sm">
+                    <li><a class="footer-link" href="#gioi-thieu">Giới thiệu</a></li>
+                    <li><a class="footer-link" href="#tac-gia">Tác giả</a></li>
+                    <li><a class="footer-link" href="#truyen-thong">Truyền thông</a></li>
+                    <li><a class="footer-link" href="#doc-thu">Đọc thử</a></li>
+                    <li><a class="footer-link" href="#danh-gia">Đánh giá</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3>Chính sách</h3>
+                <!-- TODO: trỏ tới trang chính sách thật -->
+                <ul class="text-sm">
+                    <li><a class="footer-link" href="#">Chính sách giao hàng</a></li>
+                    <li><a class="footer-link" href="#">Chính sách đổi trả</a></li>
+                    <li><a class="footer-link" href="#">Chính sách bảo mật</a></li>
+                    <li><a class="footer-link" href="#">Hướng dẫn thanh toán</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="border-t border-ivory/10">
+            <div class="container-site flex flex-col items-center justify-between gap-2 py-6 text-center text-xs text-ivory/60 sm:flex-row sm:text-left">
+                <p>© <span data-year></span> <span data-store="name"></span>. Bảo lưu mọi quyền.</p>
+                <p>Nhà Giả Kim – Paulo Coelho. Hình ảnh bìa và trang đọc thử thuộc quyền của chủ sở hữu.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===================== STICKY CTA (MOBILE) ===================== -->
+    <div id="sticky-cta" class="sticky-cta md:hidden" aria-hidden="true" inert>
+        <div class="flex items-center justify-between gap-3">
+            <div class="leading-tight">
+                <p class="font-display text-base text-champagne">Nhà Giả Kim</p>
+                <p class="text-sm text-ivory/80" data-price>—</p>
+            </div>
+            <button type="button" data-open-order class="btn btn-primary btn-sm px-6">
+                Mua ngay <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- ===================== ORDER MODAL (một instance duy nhất) ===================== -->
+    <dialog id="order-dialog" class="order-dialog" aria-labelledby="order-title">
+        <div class="order-panel">
+            <div class="order-head">
+                <div class="flex items-start justify-between gap-4">
+                    <div>
+                        <p class="eyebrow eyebrow--light">Đặt hàng nhanh</p>
+                        <h2 id="order-title" class="mt-1 font-display text-2xl font-semibold text-royal">Đặt mua Nhà Giả Kim</h2>
+                    </div>
+                    <button type="button" class="icon-btn icon-btn--light shrink-0" data-close-order aria-label="Đóng form đặt hàng">
+                        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="mt-4 flex items-center gap-4">
+                    <img src="images/sach-nha-gia-kim.png" width="56" height="82" alt="" class="h-[82px] w-14 rounded-sm object-cover shadow-md">
+                    <div class="min-w-0">
+                        <p class="font-semibold leading-snug">Nhà Giả Kim – Paulo Coelho</p>
+                        <p class="text-sm text-ink/70" data-product-edition></p>
+                        <p class="mt-1 font-semibold text-royal"><span data-price>—</span> <span class="text-sm font-normal text-ink/60">/ cuốn</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <form id="order-form" class="flex min-h-0 flex-1 flex-col" novalidate>
+                @Html.AntiForgeryToken()
+                <div class="order-scroll">
+                    <fieldset class="form-fieldset">
+                        <legend class="form-legend"><i class="fa-solid fa-user" aria-hidden="true"></i> Thông tin người nhận</legend>
+                        <div class="grid gap-4 sm:grid-cols-2">
+                            <div>
+                                <label class="form-label" for="f-fullName">Họ và tên <span class="req" aria-hidden="true">*</span></label>
+                                <input id="f-fullName" name="fullName" type="text" class="form-control" autocomplete="name"
+                                       maxlength="100" required aria-describedby="e-fullName" placeholder="Nguyễn Văn A">
+                                <p id="e-fullName" class="field-error"></p>
+                            </div>
+                            <div>
+                                <label class="form-label" for="f-phone">Số điện thoại <span class="req" aria-hidden="true">*</span></label>
+                                <input id="f-phone" name="phone" type="tel" inputmode="tel" class="form-control" autocomplete="tel"
+                                       maxlength="16" required aria-describedby="e-phone" placeholder="09xx xxx xxx">
+                                <p id="e-phone" class="field-error"></p>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="form-fieldset">
+                        <legend class="form-legend"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Địa chỉ nhận hàng</legend>
+                        <div>
+                            <label class="form-label" for="f-addressLine">Địa chỉ <span class="req" aria-hidden="true">*</span></label>
+                            <textarea id="f-addressLine" name="addressLine" rows="2" class="form-control" maxlength="200" required
+                                      aria-describedby="e-addressLine" placeholder="Số nhà, tên đường, phường/xã, tỉnh/thành phố…" autocomplete="street-address"></textarea>
+                            <p id="e-addressLine" class="field-error"></p>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="form-fieldset">
+                        <legend class="form-legend"><i class="fa-solid fa-book" aria-hidden="true"></i> Số lượng</legend>
+                        <div class="flex flex-wrap items-center gap-4">
+                            <div class="qty-stepper">
+                                <button type="button" data-qty="-1" aria-label="Giảm số lượng"><i class="fa-solid fa-minus" aria-hidden="true"></i></button>
+                                <input id="f-quantity" name="quantity" type="number" inputmode="numeric" min="1" value="1"
+                                       aria-label="Số lượng" aria-describedby="e-quantity">
+                                <button type="button" data-qty="1" aria-label="Tăng số lượng"><i class="fa-solid fa-plus" aria-hidden="true"></i></button>
+                            </div>
+                            <p class="text-sm text-ink/70">Tối đa <span data-max-qty></span> cuốn/đơn</p>
+                        </div>
+                        <p id="e-quantity" class="field-error"></p>
+                    </fieldset>
+
+                    <fieldset class="form-fieldset">
+                        <legend class="form-legend"><i class="fa-solid fa-wallet" aria-hidden="true"></i> Phương thức thanh toán</legend>
+                        <div class="grid gap-3">
+                            <label class="pay-option">
+                                <input type="radio" name="paymentMethod" value="COD" checked>
+                                <span class="pay-box">
+                                    <span class="pay-dot" aria-hidden="true"></span>
+                                    <span>
+                                        <span class="block font-semibold">Thanh toán khi nhận hàng (COD)</span>
+                                        <span class="block text-sm text-ink/70">Kiểm tra sách rồi thanh toán cho nhân viên giao hàng.</span>
+                                    </span>
+                                    <i class="fa-solid fa-truck-fast ml-auto mt-1 text-antique-gold" aria-hidden="true"></i>
+                                </span>
+                            </label>
+                            <label class="pay-option">
+                                <input type="radio" name="paymentMethod" value="CHUYEN_KHOAN">
+                                <span class="pay-box">
+                                    <span class="pay-dot" aria-hidden="true"></span>
+                                    <span>
+                                        <span class="block font-semibold">Chuyển khoản ngân hàng</span>
+                                        <span class="block text-sm text-ink/70">Thông tin chuyển khoản/QR hiển thị sau khi đơn được tạo.</span>
+                                    </span>
+                                    <i class="fa-solid fa-building-columns ml-auto mt-1 text-antique-gold" aria-hidden="true"></i>
+                                </span>
+                            </label>
+                        </div>
+                    </fieldset>
+
+                    <div class="form-fieldset">
+                        <label class="form-label" for="f-note">Ghi chú <span class="font-normal text-ink/60">(không bắt buộc)</span></label>
+                        <textarea id="f-note" name="note" rows="2" class="form-control" maxlength="300"
+                                  aria-describedby="h-note" placeholder="VD: giao giờ hành chính, gói quà…"></textarea>
+                        <p id="h-note" class="field-hint">Tối đa 300 ký tự.</p>
+                    </div>
+
+                    <div class="order-summary" aria-live="polite">
+                        <div><span>Đơn giá</span><span data-sum="unit">—</span></div>
+                        <div><span>Số lượng</span><span data-sum="qty">1</span></div>
+                        <div><span>Tạm tính</span><span data-sum="subtotal">—</span></div>
+                        <div><span>Phí giao hàng</span><span data-sum="shipping">—</span></div>
+                        <div class="total"><span>Tổng thanh toán</span><span data-sum="total">—</span></div>
+                    </div>
+                    <p class="mt-3 flex gap-2 text-xs leading-relaxed text-ink/70">
+                        <i class="fa-solid fa-shield-halved mt-0.5 text-bronze" aria-hidden="true"></i>
+                        <span data-shipping-policy></span>
+                    </p>
+
+                    <div id="order-status" class="form-status mt-4" role="alert"></div>
+                </div>
+
+                <div class="order-footer">
+                    <button type="submit" class="btn btn-primary w-full" data-submit>
+                        <i class="fa-solid fa-lock" aria-hidden="true"></i>
+                        <span data-submit-label>Xác nhận đặt hàng</span>
+                    </button>
+                    <p class="mt-2 text-center text-xs text-ink/60">Thông tin của bạn chỉ dùng để giao hàng.</p>
+                </div>
+            </form>
+
+            <!-- Kết quả (chỉ hiện khi backend xác nhận đã tạo đơn) -->
+            <div id="order-result" class="order-scroll" hidden tabindex="-1"></div>
+        </div>
+    </dialog>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

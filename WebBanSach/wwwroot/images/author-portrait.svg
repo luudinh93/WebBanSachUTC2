@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 600" width="480" height="600" role="img" aria-labelledby="author-ph-title">
+  <title id="author-ph-title">Ảnh minh họa vị trí chân dung tác giả Paulo Coelho – thay bằng ảnh có giấy phép</title>
+  <defs>
+    <linearGradient id="abg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#34205E"/>
+      <stop offset="1" stop-color="#1B0E33"/>
+    </linearGradient>
+    <radialGradient id="aglow" cx=".5" cy=".38" r=".5">
+      <stop offset="0" stop-color="#F3D9A5" stop-opacity=".28"/>
+      <stop offset="1" stop-color="#F3D9A5" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="agold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F3D9A5"/>
+      <stop offset="1" stop-color="#B98A43"/>
+    </linearGradient>
+  </defs>
+  <rect width="480" height="600" fill="url(#abg)"/>
+  <rect width="480" height="600" fill="url(#aglow)"/>
+  <g fill="#F3D9A5" opacity=".6">
+    <circle cx="70" cy="80" r="1.5"/><circle cx="410" cy="110" r="1.5"/>
+    <circle cx="380" cy="60" r="1"/><circle cx="110" cy="150" r="1"/>
+    <circle cx="430" cy="210" r="1.2"/><circle cx="48" cy="230" r="1.2"/>
+  </g>
+  <!-- Bóng chân dung -->
+  <g fill="url(#agold)" opacity=".9">
+    <ellipse cx="240" cy="236" rx="74" ry="88"/>
+    <path d="M90 600 C96 470 160 392 240 392 C320 392 384 470 390 600 Z"/>
+  </g>
+  <path d="M166 214 C176 160 210 140 240 140 C278 140 306 164 314 214" fill="none" stroke="#21123D" stroke-opacity=".25" stroke-width="2"/>
+  <path d="M0 520 C120 490 200 540 300 512 C380 490 430 500 480 488 L480 600 L0 600 Z" fill="#21123D" opacity=".55"/>
+  <text x="240" y="566" text-anchor="middle" font-family="Georgia, serif" font-size="15" letter-spacing="3" fill="#F7F2E9" fill-opacity=".85">PAULO COELHO</text>
+</svg>
