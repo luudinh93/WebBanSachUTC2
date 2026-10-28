@@ -6,6 +6,7 @@ namespace WebBanSach.Models.Requests
         public int SoLuong { get; set; }
         public string TenKhachHang { get; set; } = string.Empty;
         public string SDT { get; set; } = string.Empty;
+        public string? Email { get; set; }
         public string DiaChi { get; set; } = string.Empty;
         public string MaHinhThucThanhToan { get; set; } = string.Empty;
         public string? GhiChu { get; set; }

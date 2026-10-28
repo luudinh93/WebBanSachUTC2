@@ -1081,3 +1081,78 @@ body.modal-open .sticky-cta { transform: translateY(110%); }
   }
   .js .reveal { opacity: 1; transform: none; }
 }
+
+/* =========================================================
+   SweetAlert2 – dialog đặt hàng thành công, đồng bộ theme
+   (style.css nạp sau sweetalert2.min.css nên ghi đè được)
+   ========================================================= */
+.swal2-container.swal2-backdrop-show { background: rgba(24, 14, 44, .62); }
+.ngk-swal {
+  /* chiều rộng do option width của Swal.fire đặt (480 / 860px), mobile tự co theo màn hình */
+  max-width: calc(100vw - 32px);
+  padding: 24px 24px 22px;
+  border-radius: 20px;
+  background: var(--ngk-ivory);
+  color: var(--ngk-ink);
+  font-family: var(--font-body);
+  border: 1px solid rgba(216, 173, 97, .35);
+  box-shadow: 0 30px 70px rgba(24, 14, 44, .35);
+}
+/* Giữ màu icon mặc định của SweetAlert2 (success xanh, warning vàng, error đỏ);
+   chỉ đổi nền các mảng che của icon success cho trùng nền popup */
+.ngk-swal .swal2-icon.swal2-success [class^='swal2-success-circular-line'],
+.ngk-swal .swal2-icon.swal2-success .swal2-success-fix { background-color: var(--ngk-ivory); }
+.ngk-swal .swal2-icon { margin-top: 4px; }
+.ngk-swal-title {
+  padding: 4px 0 0;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--ngk-royal);
+}
+.ngk-swal-body { margin: 12px 0 0; padding: 0; text-align: left; font-size: 14px; line-height: 1.55; }
+
+.ngk-swal-grid { display: grid; gap: 14px; }
+.ngk-swal-col { display: grid; gap: 14px; align-content: start; }
+@media (min-width: 768px) {
+  .ngk-swal-grid.has-qr { grid-template-columns: minmax(0, 1fr) 280px; align-items: stretch; }
+}
+
+.ngk-swal-card {
+  display: grid;
+  gap: 8px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid rgba(52, 32, 94, .08);
+}
+.ngk-swal-card--bank { background: var(--ngk-sand); border-color: rgba(216, 173, 97, .45); }
+.ngk-swal-row { display: flex; justify-content: space-between; gap: 12px; }
+.ngk-swal-row dt { color: rgba(41, 35, 56, .65); white-space: nowrap; }
+.ngk-swal-row dd { margin: 0; text-align: right; overflow-wrap: anywhere; }
+.ngk-swal-row dd.is-strong { font-weight: 700; color: var(--ngk-royal); }
+
+.ngk-swal-qrbox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  border-radius: 14px;
+  background: var(--ngk-sand);
+  border: 1px solid rgba(216, 173, 97, .45);
+}
+.ngk-swal-qrtitle { margin-bottom: 10px; text-align: center; font-weight: 600; color: var(--ngk-royal); }
+.ngk-swal-qrtitle i { margin-right: 6px; color: var(--ngk-bronze); }
+.ngk-swal-qr {
+  display: block;
+  width: 240px;
+  max-width: 100%;
+  height: auto;
+  padding: 8px;
+  border-radius: 12px;
+  background: #fff;
+}
+.ngk-swal-note { margin-top: 12px; text-align: center; font-size: 13px; color: rgba(41, 35, 56, .7); }
+.ngk-swal-actions { margin-top: 18px; width: 100%; }
+.ngk-swal-actions .btn { min-width: 160px; margin: 0; }

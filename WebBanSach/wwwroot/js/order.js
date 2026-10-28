@@ -58,6 +58,8 @@
     form.elements.fullName.focus();
   }
   NGK.openOrderModal = openOrderModal;
+  // Gọi được từ console để thử dialog kết quả: NGK.showOrderResult(message, data)
+  NGK.showOrderResult = function (message, data) { showResult(message, data); };
 
   document.addEventListener('click', function (e) {
     var trigger = e.target.closest('[data-open-order]');
@@ -148,6 +150,13 @@
       if (!/^0(3|5|7|8|9)\d{8}$/.test(normalizePhone(v))) return 'Số điện thoại chưa đúng định dạng Việt Nam (VD: 0912 345 678).';
       return '';
     },
+    email: function (v) {
+      v = v.trim();
+      if (!v) return ''; // không bắt buộc
+      if (v.length > 100) return 'Email tối đa 100 ký tự.';
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) return 'Email chưa đúng định dạng (VD: ban@vidu.com).';
+      return '';
+    },
     addressLine: function (v) {
       v = v.trim();
       if (!v) return 'Vui lòng nhập địa chỉ nhận hàng.';
@@ -220,6 +229,7 @@
       soLuong: getQty(),
       tenKhachHang: form.elements.fullName.value.trim(),
       sdt: normalizePhone(form.elements.phone.value),
+      email: form.elements.email.value.trim() || null,
       diaChi: form.elements.addressLine.value.trim(),
       maHinhThucThanhToan: form.elements.paymentMethod.value,
       ghiChu: form.elements.note.value.trim().slice(0, 300)
@@ -270,7 +280,7 @@
       })
       .then(function (body) {
         idempotencyKey = newKey();
-        showResult(body.message);
+        showResult(body.message, body.data);
       })
       .catch(function (err) {
         var msg = err.name === 'AbortError'
@@ -284,26 +294,74 @@
       });
   }
 
-  /* ---------- Kết quả (chỉ khi server xác nhận): alert Tailwind góc phải trên, tự ẩn sau 5s ---------- */
-  var TOAST_MS = 5000;
+  /* ---------- Kết quả (chỉ khi server xác nhận): dialog SweetAlert2 ở giữa màn hình ----------
+     data = Responses.Data (ThongTinDonHang): maDonHang, soLuong, tongTien, tenHinhThucThanhToan,
+     chuyenKhoan (chỉ có khi chọn chuyển khoản): nganHang, soTaiKhoan, tenTaiKhoan, soTien, noiDung, anhQR */
+  function infoRow(label, value, strong) {
+    return '<div class="ngk-swal-row"><dt>' + esc(label) + '</dt><dd' + (strong ? ' class="is-strong"' : '') + '>' + value + '</dd></div>';
+  }
 
-  function showResult(message) {
-    // Đóng modal và làm mới form để đơn sau bắt đầu từ trạng thái trống
+  function showResult(message, data) {
+    // Đóng modal đặt hàng (dialog nằm ở top layer sẽ che SweetAlert) và làm mới form cho đơn sau
     resetToForm(true);
     dialog.close();
 
-    var toast = document.createElement('div');
-    toast.setAttribute('role', 'alert');
-    toast.className = 'fixed right-4 top-4 z-[9999] flex w-[calc(100vw-2rem)] max-w-sm items-start gap-3 rounded-lg border border-green-300 bg-green-50 p-4 text-sm text-green-800 shadow-lg transition-opacity duration-300';
-    toast.innerHTML =
-      '<i class="fa-solid fa-circle-check mt-0.5 text-green-600" aria-hidden="true"></i>' +
-      '<p class="flex-1">' + esc(message || 'Đặt hàng thành công.') + '</p>';
-    document.body.appendChild(toast);
+    data = data || {};
+    // Chỉ hiện QR + thông tin tài khoản khi khách chọn chuyển khoản; COD thì bỏ hẳn
+    var ck = data.maHinhThucThanhToan === 'CHUYEN_KHOAN' ? data.chuyenKhoan : null;
 
-    setTimeout(function () {
-      toast.classList.add('opacity-0');
-      setTimeout(function () { toast.remove(); }, 300);
-    }, TOAST_MS);
+    // Cột trái: thông tin đơn (+ thông tin tài khoản nếu chuyển khoản)
+    var left =
+      '<dl class="ngk-swal-card">' +
+      infoRow('Mã đơn hàng', esc(data.maDonHang || ''), true) +
+      infoRow('Số lượng', esc(String(data.soLuong || '')) + ' cuốn') +
+      infoRow('Tổng tiền', esc(fmt(data.tongTien)), true) +
+      infoRow('Thanh toán', esc(data.tenHinhThucThanhToan || '')) +
+      '</dl>' +
+      (ck
+        ? '<dl class="ngk-swal-card ngk-swal-card--bank">' +
+          infoRow('Ngân hàng', esc(ck.nganHang)) +
+          infoRow('Số tài khoản', esc(ck.soTaiKhoan), true) +
+          infoRow('Chủ tài khoản', esc(ck.tenTaiKhoan)) +
+          infoRow('Số tiền', esc(fmt(ck.soTien)), true) +
+          infoRow('Nội dung', esc(ck.noiDung), true) +
+          '</dl>'
+        : '');
+
+    // Cột phải (chỉ khi chuyển khoản): mã QR
+    var right = !ck ? '' :
+      '<div class="ngk-swal-qrbox">' +
+      '  <p class="ngk-swal-qrtitle"><i class="fa-solid fa-qrcode" aria-hidden="true"></i> Quét mã để chuyển khoản</p>' +
+      (ck.anhQR
+        ? '<img class="ngk-swal-qr" src="' + esc(ck.anhQR) + '" width="240" height="240" alt="Mã QR chuyển khoản cho đơn ' + esc(ck.maDonHang) + '">'
+        : '<p class="ngk-swal-note">Chưa tạo được mã QR, vui lòng chuyển khoản theo thông tin tài khoản.</p>') +
+      '</div>';
+
+    var html =
+      '<div class="ngk-swal-grid' + (ck ? ' has-qr' : '') + '">' +
+      '  <div class="ngk-swal-col">' + left + '</div>' +
+      right +
+      '</div>' +
+      (message ? '<p class="ngk-swal-note">' + esc(message) + '</p>' : '');
+
+    var Swal = window.Swal || window.Sweetalert2;
+    if (!Swal) { window.alert('Đặt hàng thành công! Mã đơn: ' + (data.maDonHang || '')); return; }
+
+    Swal.fire({
+      icon: 'success',
+      title: 'Đặt hàng thành công',
+      html: html,
+      width: ck ? 860 : 480,        // có QR: rộng để dàn 2 cột trên desktop
+      confirmButtonText: 'Hoàn tất',
+      buttonsStyling: false,       // dùng class .btn của theme thay cho style mặc định
+      customClass: {
+        popup: 'ngk-swal',
+        title: 'ngk-swal-title',
+        htmlContainer: 'ngk-swal-body',
+        confirmButton: 'btn btn-royal',
+        actions: 'ngk-swal-actions'
+      }
+    });
   }
 
   function resetToForm(clear) {

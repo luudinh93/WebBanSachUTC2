@@ -47,6 +47,8 @@
     </style>
 
     <!-- CSS tùy chỉnh -->
+    <!-- SweetAlert2 (quản lý bằng libman, xem libman.json) – nạp trước style.css để style.css ghi đè theo theme -->
+    <link rel="stylesheet" href="lib/sweetalert2/sweetalert2.min.css">
     <link rel="stylesheet" href="css/style.css">
 
     <link rel="preload" as="image" href="images/sach-nha-gia-kim.png" fetchpriority="high">
@@ -60,6 +62,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" defer></script>
     <!-- StPageFlip – hiệu ứng lật trang sách cho mục Đọc thử -->
     <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js" defer></script>
+    <script src="lib/sweetalert2/sweetalert2.min.js" defer></script>
     <script src="js/data.js" defer></script>
     <script src="js/navigation.js" defer></script>
     <script src="js/media.js" defer></script>
@@ -209,8 +212,9 @@
                 <div class="order-scroll">
                     <fieldset class="form-fieldset">
                         <legend class="form-legend"><i class="fa-solid fa-user" aria-hidden="true"></i> Thông tin người nhận</legend>
-                        <div class="grid gap-4 sm:grid-cols-2">
-                            <div>
+                        <!-- Mobile: 1 cột. Từ sm: họ tên full width, SĐT + email mỗi ô 1/2 -->
+                        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                            <div class="sm:col-span-2">
                                 <label class="form-label" for="f-fullName">Họ và tên <span class="req" aria-hidden="true">*</span></label>
                                 <input id="f-fullName" name="fullName" type="text" class="form-control" autocomplete="name"
                                        maxlength="100" required aria-describedby="e-fullName" placeholder="Nguyễn Văn A">
@@ -221,6 +225,12 @@
                                 <input id="f-phone" name="phone" type="tel" inputmode="tel" class="form-control" autocomplete="tel"
                                        maxlength="16" required aria-describedby="e-phone" placeholder="09xx xxx xxx">
                                 <p id="e-phone" class="field-error"></p>
+                            </div>
+                            <div>
+                                <label class="form-label" for="f-email">Email <span class="font-normal text-ink/60">(không bắt buộc)</span></label>
+                                <input id="f-email" name="email" type="email" inputmode="email" class="form-control" autocomplete="email"
+                                       maxlength="100" aria-describedby="e-email" placeholder="ban@vidu.com">
+                                <p id="e-email" class="field-error"></p>
                             </div>
                         </div>
                     </fieldset>

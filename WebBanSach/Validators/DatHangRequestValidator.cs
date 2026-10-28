@@ -27,6 +27,11 @@ namespace WebBanSach.Validators
                 .Must(v => !string.IsNullOrWhiteSpace(v)).WithMessage("Vui lòng nhập số điện thoại.")
                 .Must(v => PhoneRegex.IsMatch(NormalizePhone(v))).WithMessage("Số điện thoại chưa đúng định dạng Việt Nam.");
 
+            RuleFor(x => x.Email)
+                .MaximumLength(100).WithMessage("Email tối đa 100 ký tự.")
+                .EmailAddress().WithMessage("Email chưa đúng định dạng.")
+                .When(x => !string.IsNullOrWhiteSpace(x.Email));
+
             RuleFor(x => x.DiaChi)
                 .Must(v => !string.IsNullOrWhiteSpace(v)).WithMessage("Vui lòng nhập địa chỉ nhận hàng.")
                 .Must(v => v.Trim().Length is >= 5 and <= 200).WithMessage("Địa chỉ cần từ 5 đến 200 ký tự.");

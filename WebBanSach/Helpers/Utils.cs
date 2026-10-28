@@ -1,4 +1,7 @@
-﻿using QRCoder;
+using MailKit.Net.Smtp;
+using MailKit.Security;
+using MimeKit;
+using QRCoder;
 using SkiaSharp;
 using System.Drawing;
 using System.Text;
@@ -540,6 +543,55 @@ namespace WebBanSach.Helpers
                 ".webp" => SKEncodedImageFormat.Webp,
                 _ => SKEncodedImageFormat.Png // Default to PNG
             };
+        }
+
+        /// <summary>
+        /// Gửi email HTML qua SMTP (MailKit). Dùng chung cho mọi chức năng gửi mail.
+        /// </summary>
+        /// <param name="host">SMTP host, VD: smtp.gmail.com</param>
+        /// <param name="port">SMTP port, VD: 587 (STARTTLS)</param>
+        /// <param name="fromEmail">Tài khoản gửi (Gmail)</param>
+        /// <param name="appPassword">App Password của tài khoản gửi</param>
+        /// <param name="toEmail">Email người nhận</param>
+        /// <param name="subject">Tiêu đề</param>
+        /// <param name="htmlBody">Nội dung HTML</param>
+        /// <param name="inlineImages">Ảnh nhúng trong nội dung: key = Content-Id (dùng src="cid:key"), value = đường dẫn file</param>
+        /// <param name="fromName">Tên hiển thị người gửi (tùy chọn)</param>
+        public static async Task SendEmailAsync(
+            string host,
+            int port,
+            string fromEmail,
+            string appPassword,
+            string toEmail,
+            string subject,
+            string htmlBody,
+            IDictionary<string, string>? inlineImages = null,
+            string? fromName = null)
+        {
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress(fromName ?? fromEmail, fromEmail));
+            message.To.Add(MailboxAddress.Parse(toEmail));
+            message.Subject = subject;
+
+            var builder = new BodyBuilder { HtmlBody = htmlBody };
+
+            if (inlineImages != null)
+            {
+                foreach (var (contentId, filePath) in inlineImages)
+                {
+                    if (!File.Exists(filePath)) continue;
+                    var image = builder.LinkedResources.Add(filePath);
+                    image.ContentId = contentId;
+                }
+            }
+
+            message.Body = builder.ToMessageBody();
+
+            using var client = new SmtpClient { Timeout = 30000 }; // 30s, tránh treo khi SMTP không phản hồi
+            await client.ConnectAsync(host, port, port == 465 ? SecureSocketOptions.SslOnConnect : SecureSocketOptions.StartTls);
+            await client.AuthenticateAsync(fromEmail, appPassword);
+            await client.SendAsync(message);
+            await client.DisconnectAsync(true);
         }
     }
 }

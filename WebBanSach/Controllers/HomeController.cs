@@ -1,6 +1,7 @@
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using WebBanSach.Helpers;
 using WebBanSach.Models;
 using WebBanSach.Models.Requests;
 using WebBanSach.Models.Responses;
@@ -57,10 +58,19 @@ namespace WebBanSach.Controllers
             if (donHang is null)
                 return NotFound(new Responses { Status = 404, Message = "Sản phẩm không tồn tại hoặc đã ngừng bán." });
 
+            bool chuyenKhoan = donHang.MaHinhThucThanhToan == WebConstants.MaThanhToanChuyenKhoan;
+            var thongTinDonHang = _bookServices.TaoThongTinDonHang(donHang); // tạo ảnh QR trước để email nhúng được
+
+            // Đơn đã lưu xuống CSDL (CreateOrderAsync trả về khác null) mới gửi email, chạy nền để không làm chậm response
+            _bookServices.GuiEmailDatHangThanhCongTrongNen(donHang);
+
             return Ok(new Responses
             {
                 Status = 200,
-                Message = $"Đặt hàng thành công! Mã đơn của bạn là {donHang.MaDonHang}. Nhà sách sẽ liên hệ xác nhận với bạn trong thời gian sớm nhất."
+                Message = chuyenKhoan
+                    ? "Vui lòng quét mã QR để chuyển khoản và giữ nguyên nội dung chuyển khoản là mã đơn hàng."
+                    : "Nhà sách sẽ gọi điện xác nhận trước khi giao hàng.",
+                Data = thongTinDonHang
             });
         }
 

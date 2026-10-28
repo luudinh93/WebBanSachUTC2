@@ -136,6 +136,9 @@ namespace WebBanSach.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("GhiChu")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -300,7 +303,7 @@ namespace WebBanSach.Migrations
                             TenSach = "Nhà Giả Kim",
                             TheLoai = "Tiểu thuyết",
                             TieuDeChinh = "Nhà Giả Kim",
-                            TieuDePhu = "Một hành trình đầy cảm hứng về giấc mơ, lòng dũng cảm và việc lắng nghe tiếng gọi của trái tim."
+                            TieuDePhu = ""
                         });
                 });
 
